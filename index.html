@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="시도별 실시간 대기오염 측정 정보를 확인하는 웹앱">
+  <title>우리 동네 대기질</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <main class="app">
+    <header class="page-header">
+      <p class="eyebrow">실시간 대기질 정보</p>
+      <h1>공기 신호등</h1>
+      <p class="header-description">우리 동네 공기 상태를 한눈에 확인하세요.</p>
+    </header>
+
+    <section class="summary-panel" aria-labelledby="summary-title">
+      <div class="region-picker">
+        <label for="region-select">시도 선택</label>
+        <select id="region-select" aria-label="대기질을 확인할 시도">
+          <option value="전국">전국</option>
+          <option value="서울" selected>서울</option>
+          <option value="부산">부산</option>
+          <option value="대구">대구</option>
+          <option value="인천">인천</option>
+          <option value="광주">광주</option>
+          <option value="대전">대전</option>
+          <option value="울산">울산</option>
+          <option value="세종">세종</option>
+          <option value="경기">경기</option>
+          <option value="강원">강원</option>
+          <option value="충북">충북</option>
+          <option value="충남">충남</option>
+          <option value="전북">전북</option>
+          <option value="전남">전남</option>
+          <option value="경북">경북</option>
+          <option value="경남">경남</option>
+          <option value="제주">제주</option>
+        </select>
+      </div>
+      <p id="location-message" class="location-message" role="status" aria-live="polite">
+        위치 권한을 허용하면 좌표를 OpenStreetMap 위치 검색 서비스에 보내 시도를 확인합니다.
+      </p>
+      <div class="air-status" id="air-status" aria-live="polite" aria-busy="true">
+        <h2 id="summary-title"><span id="selected-region">서울</span>의 공기 상태</h2>
+        <p class="status-display">
+          <span id="status-emoji" class="status-emoji" aria-hidden="true">⏳</span>
+          <span id="status-label" class="status-label">불러오는 중...</span>
+        </p>
+        <p class="average-value"><span id="average-value">불러오는 중...</span><span class="unit">㎍/㎥</span></p>
+        <p id="average-note" class="average-note">평균 미세먼지(PM10)</p>
+        <p id="health-message" class="health-message">측정 정보를 불러오는 중...</p>
+      </div>
+    </section>
+
+    <section class="stations-section" aria-labelledby="stations-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">측정소별 현황</p>
+          <h2 id="stations-title">측정소 목록</h2>
+        </div>
+        <span id="station-count" class="station-count" aria-live="polite"></span>
+      </div>
+      <div class="chart-panel">
+        <h3>측정소별 미세먼지 상위 10곳</h3>
+        <p id="chart-message" class="chart-message" role="status">측정 정보를 불러오는 중입니다.</p>
+        <div class="chart-container">
+          <canvas id="station-chart" role="img" aria-label="미세먼지 수치가 높은 측정소 상위 10곳 가로 막대그래프"></canvas>
+        </div>
+      </div>
+      <label class="station-search">
+        <span>측정소 이름 검색</span>
+        <input id="station-search" type="search" placeholder="측정소 이름을 입력하세요" autocomplete="off">
+      </label>
+      <p id="status-message" class="status-message" role="status" aria-live="polite">측정 정보를 불러오는 중입니다.</p>
+      <div id="station-list" class="station-grid"></div>
+    </section>
+
+    <footer class="page-footer">자료: 한국환경공단 에어코리아</footer>
+  </main>
+</body>
+</html>

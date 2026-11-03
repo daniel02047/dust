@@ -1,0 +1,469 @@
+/* 측정 등급과 화면 크기에 맞춰 읽기 쉬운 대기질 화면을 구성합니다. */
+:root {
+  color-scheme: light;
+  font-family: Pretendard, -apple-system, BlinkMacSystemFont, "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+  color: #172033;
+  background: #f4f7fb;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background: #f4f7fb;
+}
+
+.app {
+  width: min(1120px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 48px 0 28px;
+}
+
+.page-header {
+  margin-bottom: 28px;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: #52709b;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+h1,
+h2,
+p {
+  margin-top: 0;
+}
+
+.page-header h1 {
+  margin-bottom: 8px;
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
+  letter-spacing: -0.06em;
+}
+
+.header-description {
+  margin-bottom: 0;
+  color: #68758a;
+}
+
+.summary-panel {
+  overflow: hidden;
+  border: 1px solid #e3eaf3;
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 12px 32px rgb(34 57 90 / 6%);
+}
+
+.region-picker {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 24px;
+  border-bottom: 1px solid #e8edf4;
+}
+
+.location-message {
+  margin: 0;
+  padding: 10px 24px 0;
+  color: #7a8799;
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.region-picker label {
+  color: #526078;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+select {
+  min-width: 150px;
+  min-height: 42px;
+  padding: 0 36px 0 12px;
+  border: 1px solid #d6dfeb;
+  border-radius: 10px;
+  background-color: #fff;
+  color: #172033;
+  font: inherit;
+  font-size: 1rem;
+}
+
+select:focus-visible {
+  outline: 3px solid rgb(45 111 214 / 25%);
+  border-color: #2d6fd6;
+}
+
+.air-status {
+  --status-color: #708099;
+  padding: 34px 24px 38px;
+  background: linear-gradient(135deg, #f8fafc, #fff 72%);
+  text-align: center;
+  transition: background-color 180ms ease;
+}
+
+.air-status.grade-1 {
+  --status-color: #3785e8;
+  background: linear-gradient(135deg, #eef6ff, #fff 75%);
+}
+
+.air-status.grade-2 {
+  --status-color: #42a765;
+  background: linear-gradient(135deg, #eef9f1, #fff 75%);
+}
+
+.air-status.grade-3 {
+  --status-color: #e89332;
+  background: linear-gradient(135deg, #fff5e9, #fff 75%);
+}
+
+.air-status.grade-4 {
+  --status-color: #e4564e;
+  background: linear-gradient(135deg, #fff0ef, #fff 75%);
+}
+
+.air-status h2 {
+  margin-bottom: 16px;
+  color: #526078;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.status-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
+.status-emoji {
+  font-size: clamp(2.8rem, 8vw, 4.5rem);
+  line-height: 1;
+}
+
+.status-label {
+  color: var(--status-color);
+  font-size: clamp(2.5rem, 7vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.07em;
+  line-height: 1.2;
+}
+
+.average-value {
+  margin-bottom: 0;
+  color: #182b49;
+  font-size: clamp(2.4rem, 7vw, 3.8rem);
+  font-weight: 800;
+  letter-spacing: -0.07em;
+  line-height: 1.2;
+}
+
+.unit {
+  margin-left: 10px;
+  color: #68758a;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.average-note {
+  margin: 5px 0 0;
+  color: #7a8799;
+  font-size: 0.82rem;
+}
+
+.health-message {
+  display: inline-block;
+  margin: 20px 0 0;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: #f0f3f7;
+  color: #526078;
+  font-size: 0.94rem;
+  font-weight: 700;
+}
+
+.air-status.grade-3 .health-message,
+.air-status.grade-4 .health-message {
+  background: #fff0ef;
+  color: #bd423c;
+}
+
+.air-status.is-loading .status-label,
+.air-status.is-loading .average-value {
+  color: #8994a4;
+  font-size: clamp(1.35rem, 4vw, 2rem);
+  letter-spacing: -0.04em;
+}
+
+.stations-section {
+  margin-top: 42px;
+}
+
+.section-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.section-heading .eyebrow {
+  margin-bottom: 4px;
+}
+
+.section-heading h2 {
+  margin-bottom: 0;
+  font-size: 1.4rem;
+  letter-spacing: -0.04em;
+}
+
+.station-count {
+  color: #68758a;
+  font-size: 0.9rem;
+}
+
+.chart-panel {
+  margin-bottom: 24px;
+  padding: 22px 24px 18px;
+  border: 1px solid #e3eaf3;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 5px 16px rgb(34 57 90 / 4%);
+}
+
+.chart-panel h3 {
+  margin: 0 0 14px;
+  font-size: 1rem;
+  letter-spacing: -0.03em;
+}
+
+.chart-message {
+  margin: 0;
+  color: #68758a;
+  font-size: 0.88rem;
+}
+
+.chart-message:empty {
+  display: none;
+}
+
+.chart-container {
+  position: relative;
+  height: 340px;
+}
+
+.chart-container canvas[hidden] {
+  display: none;
+}
+
+.station-search {
+  display: grid;
+  gap: 8px;
+  max-width: 440px;
+  margin: 0 0 16px;
+  color: #526078;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.station-search input {
+  width: 100%;
+  min-height: 46px;
+  padding: 0 14px;
+  border: 1px solid #d6dfeb;
+  border-radius: 10px;
+  background: #fff;
+  color: #172033;
+  font: inherit;
+  font-size: 1rem;
+}
+
+.station-search input::placeholder {
+  color: #929dad;
+  font-weight: 400;
+}
+
+.station-search input:focus-visible {
+  outline: 3px solid rgb(45 111 214 / 25%);
+  border-color: #2d6fd6;
+}
+
+.status-message {
+  margin: 0 0 16px;
+  color: #68758a;
+  font-size: 0.92rem;
+}
+
+.status-message:empty {
+  display: none;
+}
+
+.station-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: 16px;
+}
+
+.station-card {
+  min-width: 0;
+  padding: 20px;
+  border: 1px solid var(--card-border);
+  border-left: 5px solid var(--card-accent);
+  border-radius: 15px;
+  background: var(--card-background);
+  box-shadow: 0 5px 16px rgb(34 57 90 / 4%);
+}
+
+.station-card.grade-1 {
+  --card-background: #eef6ff;
+  --card-border: #d7e8ff;
+  --card-accent: #3785e8;
+}
+
+.station-card.grade-2 {
+  --card-background: #eef9f1;
+  --card-border: #d5efdc;
+  --card-accent: #42a765;
+}
+
+.station-card.grade-3 {
+  --card-background: #fff5e9;
+  --card-border: #f7e2c6;
+  --card-accent: #e89332;
+}
+
+.station-card.grade-4 {
+  --card-background: #fff0ef;
+  --card-border: #f5d7d4;
+  --card-accent: #e4564e;
+}
+
+.station-card.grade-unknown {
+  --card-background: #f1f3f6;
+  --card-border: #e0e4ea;
+  --card-accent: #9aa3b1;
+}
+
+.card-heading {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.station-name {
+  overflow-wrap: anywhere;
+  margin: 0;
+  font-size: 1.1rem;
+  letter-spacing: -0.03em;
+}
+
+.grade-label {
+  flex: 0 0 auto;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 75%);
+  color: #536176;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.measurement-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 0;
+}
+
+.measurement-list div {
+  min-width: 0;
+}
+
+.measurement-list dt {
+  margin-bottom: 5px;
+  color: #68758a;
+  font-size: 0.78rem;
+}
+
+.measurement-list dd {
+  overflow-wrap: anywhere;
+  margin: 0;
+  color: #25334b;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.measurement-list .measured-at {
+  grid-column: 1 / -1;
+}
+
+.measurement-list .measured-at dd {
+  font-size: 0.88rem;
+}
+
+.page-footer {
+  padding-top: 30px;
+  color: #8893a3;
+  font-size: 0.78rem;
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .app {
+    width: min(100% - 28px, 520px);
+    padding-top: 30px;
+  }
+
+  .summary-panel {
+    border-radius: 18px;
+  }
+
+  .region-picker {
+    padding: 15px 18px;
+  }
+
+  .location-message {
+    padding: 9px 18px 0;
+  }
+
+  .air-status {
+    padding: 28px 16px 30px;
+  }
+
+  .status-display {
+    gap: 8px;
+  }
+
+  .health-message {
+    max-width: 100%;
+    padding: 9px 14px;
+  }
+
+  .stations-section {
+    margin-top: 32px;
+  }
+
+  .station-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .chart-panel {
+    padding: 18px 14px 14px;
+  }
+
+  .chart-container {
+    height: 320px;
+  }
+}
